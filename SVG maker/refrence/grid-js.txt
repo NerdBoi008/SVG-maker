@@ -1,0 +1,16 @@
+function makeGrid() {
+    const pathElement = document.querySelector("svg path");
+    pathElement.setAttribute("stroke","black");
+    pathElement.setAttribute("stroke-width","0.01");
+    let value = "";
+    for(let i=1;i<height;i++) {
+        value += `M${i},${0} L${i},${height} z `; //vertical lines
+    }
+    for(let i=1;i<height;i++) {
+        value += `M${0},${i} L${width},${i} z `; //horizontal lines
+    }
+    pathElement.setAttribute("d",value);
+    svgContainer.appendChild(pathElement);
+}
+
+makeGrid();

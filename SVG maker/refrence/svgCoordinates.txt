@@ -1,0 +1,12 @@
+function getCoordinates(svg, x, y) {
+    let point = svg.createSVGPoint();
+    point.x = x;
+    point.y = y;
+
+    return point.matrixTransform(svg.getScreenCTM().inverse());
+}
+
+svgContainer.addEventListener("pointermove", (event) => {
+    const svgPoint = getCoordinates(svgContainer, event.clientX, event.clientY)
+    output.innerHTML = `X : ${Math.round(svgPoint.x)} Y: ${Math.round(svgPoint.y)}`;
+})
