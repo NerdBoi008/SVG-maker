@@ -8,3 +8,4 @@ class SVG {
     
 }
 
+console.log("dfsdf");

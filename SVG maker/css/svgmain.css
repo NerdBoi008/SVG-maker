@@ -159,6 +159,8 @@ nav {
     cursor: pointer;
 }
 
+/* -------------------------------------------------- */
+
 .controls {
     /* display: inline-block; */
     position: fixed;
@@ -218,6 +220,10 @@ main {
     color: black;
 }
 
+.path-command-controls button:hover p {
+    visibility: visible;
+}
+
 #mainCanvasContainer {
     margin: auto;
     width: 50%;
@@ -226,4 +232,3 @@ main {
     /* border-radius: 10px; */
     border: 0.1px solid #b5b5b5;
 }
-
