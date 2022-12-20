@@ -236,7 +236,7 @@ main {
     width: 10%;
 }
 
-#output {
+#coordinates {
     background-color: white;
     width: fit-content;
     padding: 10px;

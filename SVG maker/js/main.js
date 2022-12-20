@@ -1,7 +1,7 @@
 const svgMainWrapper = document.getElementById("mainCanvasContainer");
 const svgMain = document.getElementById("mainSVG");
 const commadButtons = document.querySelectorAll(".path-command-controls button");
-const output = document.querySelector("#output");
+const coords = document.querySelector("#coordinates");
 
 let showCanvasDialogBox = false;
 
@@ -15,7 +15,7 @@ function getCoordinates(svg, x, y) {
 
 svgMain.addEventListener("pointermove", (event) => {
     const svgPoint = getCoordinates(svgMain, event.clientX, event.clientY)
-    output.innerHTML = `X : ${Math.round(svgPoint.x)} Y : ${Math.round(svgPoint.y)}`;
+    coords.innerHTML = `X : ${Math.round(svgPoint.x)} Y : ${Math.round(svgPoint.y)}`;
 })
 
 svgMainWrapper.addEventListener("click", ()=> {
