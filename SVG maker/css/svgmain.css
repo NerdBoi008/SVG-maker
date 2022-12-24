@@ -199,6 +199,7 @@ main {
     box-shadow: 0px 0px 46px -15px #858585;
     font-family: inherit;
     padding: 10px;
+    position: relative;
 }
 
 .path-command-controls button svg {
@@ -212,19 +213,20 @@ main {
 
 .path-command-controls button p{
     position: absolute;
-    visibility: hidden;
+    opacity: 0;
     font-size: 15px;
     color: #9a9a9a;
-    /* height: 70%; */
-    /* width: 80%; */
-}
-
-.path-command-controls button p::first-letter {
-    font-size: 32px;
-    color: black;
+    width: 70%;
+    background-color: black;
+    border-radius: 10px;
+    color: white;
+    translate: 5% 15px;
+    transition: all .5s ease;
+    padding: 6px;
 }
 
 .path-command-controls button:hover p {
+    opacity: 1;
     visibility: visible;
 }
 
