@@ -211,21 +211,21 @@ main {
     height: 50px;
 }
 
-.path-command-controls button p{
+.path-command-controls button span{
     position: absolute;
     opacity: 0;
     font-size: 15px;
     color: #9a9a9a;
-    width: 70%;
+    /* width: 70%; */
     background-color: black;
     border-radius: 10px;
     color: white;
-    translate: 5% 15px;
-    transition: all .5s ease;
-    padding: 6px;
+    translate: -50% 15px;
+    transition: all .3s ease;
+    padding: 10px;
 }
 
-.path-command-controls button:hover p {
+.path-command-controls button:hover span {
     opacity: 1;
     visibility: visible;
 }
@@ -250,8 +250,8 @@ main {
 #mainCanvasContainer {
     user-select: none;
     margin: auto;
-    width: 50%;
-    height: 60vh;
+    width: fit-content;
+    height: fit-content;
     background-color: white;
     /* border-radius: 10px; */
     border: 0.1px solid #b5b5b5;
@@ -260,6 +260,23 @@ main {
 
 #mainSVG {
     user-select: none;
-    height: 100%;
-    width: 100%;
+    height: 400px;
+    width: 800px;
+    user-select: none;
+}
+
+#mainSVG path {
+    fill:none;
+}
+
+#mainSVG>* {
+    stroke: black;
+    fill: gray;
+    outline: none;
+}
+
+#mainSVG [class*="secondary_object"] {
+    stroke-width: 0.5;
+    stroke: gray;
+    visibility: hidden;
 }
