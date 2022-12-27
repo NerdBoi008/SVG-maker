@@ -80,8 +80,7 @@ for(let i=0;i<commadButtons.length;i++) {
                     x2: 20,
                     y2: 20,
                     class: `primary_object${objectNo}`,
-                    objectNumber: objectNo,
-                    objectType: 'Line'
+                    objectNumber: objectNo
                 });
                 svgMain.addCircle({
                     cx: 10,
@@ -106,10 +105,17 @@ for(let i=0;i<commadButtons.length;i++) {
                 
             case 1: // for cubic Curve object
                 svgMain.addCurve({
-                    d: "M 10,10 C 10,20 30,20 30,10",
+                    d: "M10,10 C10,20 30,20 30,10",
                     class: `primary_object${objectNo}`,
+                    objectNumber: objectNo
+                });
+                svgMain.addLine({
+                    x1: 10,
+                    y1: 10,
+                    x2: 10,
+                    y2: 20,
+                    class: `secondary_object${objectNo}`,
                     objectNumber: objectNo,
-                    objectType: 'cubicCurve'
                 });
                 svgMain.addCircle({
                     cx: 10,
@@ -120,15 +126,6 @@ for(let i=0;i<commadButtons.length;i++) {
                     objectType: 'cubicCurve',
                     circlePos : 'topLeft'
                 });
-                svgMain.addLine({
-                    x1: 10,
-                    y1: 10,
-                    x2: 10,
-                    y2: 20,
-                    class: `secondary_object${objectNo}`,
-                    objectNumber: objectNo,
-                    objectType: 'cubicCurve'
-                });
                 svgMain.addCircle({
                     cx: 10,
                     cy: 20,
@@ -138,6 +135,14 @@ for(let i=0;i<commadButtons.length;i++) {
                     objectType: 'cubicCurve',
                     circlePos : 'bottomLeft'
                 });
+                svgMain.addLine({
+                    x1: 30,
+                    y1: 10,
+                    x2: 30,
+                    y2: 20,
+                    class: `secondary_object${objectNo}`,
+                    objectNumber: objectNo,
+                });
                 svgMain.addCircle({
                     cx: 30,
                     cy: 10,
@@ -146,15 +151,6 @@ for(let i=0;i<commadButtons.length;i++) {
                     objectNumber: objectNo,
                     objectType: 'cubicCurve',
                     circlePos : 'topRight'
-                });
-                svgMain.addLine({
-                    x1: 30,
-                    y1: 10,
-                    x2: 30,
-                    y2: 20,
-                    class: `secondary_object${objectNo}`,
-                    objectNumber: objectNo,
-                    objectType: 'cubicCurve'
                 });
                 svgMain.addCircle({
                     cx: 30,
@@ -171,18 +167,9 @@ for(let i=0;i<commadButtons.length;i++) {
             
             case 2: //for qudratic curve
                 svgMain.addQudraticCurve({
-                    d: "M10,10 Q 20,10 20 20",
+                    d: "M10,10 Q 20,10 20,20",
                     class: `primary_object${objectNo}`,
-                    objectNumber: objectNo,
-                    objectType: 'qudraticCurve'
-                });
-                svgMain.addCircle({
-                    cx: 10,
-                    cy: 10,
-                    r:1,
-                    class: `secondary_object${objectNo}`,
-                    objectNumber: objectNo,
-                    objectType: 'qudraticCurve'
+                    objectNumber: objectNo
                 });
                 svgMain.addLine({
                     x1: 10,
@@ -190,24 +177,7 @@ for(let i=0;i<commadButtons.length;i++) {
                     x2: 20,
                     y2: 10,
                     class: `secondary_object${objectNo}`,
-                    objectNumber: objectNo, 
-                    objectType: 'qudraticCurve'
-                });
-                svgMain.addCircle({
-                    cx: 20,
-                    cy: 10,
-                    r:1,
-                    class: `secondary_object${objectNo}`,
-                    objectNumber: objectNo,
-                    objectType: 'qudraticCurve'
-                });
-                svgMain.addCircle({
-                    cx: 20,
-                    cy: 20,
-                    r:1,
-                    class: `secondary_object${objectNo}`,
-                    objectNumber: objectNo,
-                    objectType: 'qudraticCurve'
+                    objectNumber: objectNo 
                 });
                 svgMain.addLine({
                     x1: 20,
@@ -215,20 +185,39 @@ for(let i=0;i<commadButtons.length;i++) {
                     x2: 20,
                     y2: 20,
                     class: `secondary_object${objectNo}`,
+                    objectNumber: objectNo
+                });
+                svgMain.addCircle({
+                    cx: 10,
+                    cy: 10,
+                    r:1,
+                    class: `secondary_object${objectNo}`,
                     objectNumber: objectNo,
-                    objectType: 'qudraticCurve'
+                    objectType: 'qudraticCurve',
+                    circlePos : 'topLeft'
+                });
+                svgMain.addCircle({
+                    cx: 20,
+                    cy: 10,
+                    r:1,
+                    class: `secondary_object${objectNo}`,
+                    objectNumber: objectNo,
+                    objectType: 'qudraticCurve',
+                    circlePos : 'topRight'
+                });
+                svgMain.addCircle({
+                    cx: 20,
+                    cy: 20,
+                    r:1,
+                    class: `secondary_object${objectNo}`,
+                    objectNumber: objectNo,
+                    objectType: 'qudraticCurve',
+                    circlePos : 'bottomRight'
                 });
                 objectNo++;
                 break;
         }
     })
-}
-
-class Drag {
-    constructor() {
-
-    }
-
 }
 
 svgContainer.onload = (event)=> {
@@ -237,16 +226,19 @@ svgContainer.onload = (event)=> {
     svg.addEventListener("mousedown",startDrag);
     svg.addEventListener("mousemove",drag);
     svg.addEventListener("mouseup",endDrag);
-    svg.addEventListener("mouseleave",endDrag);
+    // svg.addEventListener("mouseleave",endDrag);
+    svg.addEventListener("focus",()=>{});
+    svg.addEventListener("keydown",keyFun);
     
     let selectedObj = null;
+    let lastSelectedObj = null;
     let primaryObj = null;
 
     function startDrag(event) {
         selectedObj = event.target;
         if((event.target.getAttribute("class")).includes("primary_object")){
             if(primaryObj != null){
-                if(primaryObj.getAttribute("objectNumber") != selectedObj.getAttribute("objectNumber")){
+                if((primaryObj.getAttribute("objectNumber") != selectedObj.getAttribute("objectNumber")) || (selectedObj == document.querySelector("#svgMain"))){
                     hideSecondaryObjects(primaryObj);
                 }
             }
@@ -281,15 +273,89 @@ svgContainer.onload = (event)=> {
                 }
             }
             else if(objectType == 'cubicCurve') {
-                // last left here
-                if(selectedObj.getAttribute("circlePos") == 'topleft') {
-                    let coord = getMousePosition(event);
-                    selectedObj.setAttribute("cx",Math.floor(coord.x));
-                    selectedObj.setAttribute("cy",Math.floor(coord.y));
+                let regEx, coord = getMousePosition(event);
+                let pathDElement = document.querySelector(`.primary_object${objNo}`);
+                const circlePos = selectedObj.getAttribute("circlePos");
+                const lineObj = document.querySelectorAll(`.secondary_object${objNo}`);
+                switch(circlePos) {
+                    case 'topLeft':
+                        selectedObj.setAttribute("cx",Math.floor(coord.x));
+                        selectedObj.setAttribute("cy",Math.floor(coord.y));
 
-                    const lineObj = document.querySelector(`.primary_object${objNo}`);
-                    lineObj.setAttribute("x1", Math.floor(coord.x));
-                    lineObj.setAttribute("y1", Math.floor(coord.y));
+                        lineObj[0].setAttribute("x1", Math.floor(coord.x));
+                        lineObj[0].setAttribute("y1", Math.floor(coord.y));
+                        regEx = /m\d*\,\d*/i;;
+                        pathDElement.setAttribute("d",pathDElement.getAttribute("d").replace(regEx,`M${coord.x},${coord.y}`));
+                        break;
+
+                    case 'bottomLeft':
+                        selectedObj.setAttribute("cx",Math.floor(coord.x));
+                        selectedObj.setAttribute("cy",Math.floor(coord.y));
+
+                        lineObj[0].setAttribute("x2", Math.floor(coord.x));
+                        lineObj[0].setAttribute("y2", Math.floor(coord.y));
+                        regEx = /c\s*\d*\s*\,\s*\d*/i;
+                        pathDElement.setAttribute("d",pathDElement.getAttribute("d").replace(regEx,`C${coord.x},${coord.y}`));
+                        break;
+
+                    case 'topRight':
+                        selectedObj.setAttribute("cx",Math.floor(coord.x));
+                        selectedObj.setAttribute("cy",Math.floor(coord.y));
+
+                        lineObj[3].setAttribute("x1", Math.floor(coord.x));
+                        lineObj[3].setAttribute("y1", Math.floor(coord.y));
+                        regEx =/(\s\d*\,\d*)$/i;
+                        pathDElement.setAttribute("d",pathDElement.getAttribute("d").replace(regEx,` ${coord.x},${coord.y}`));
+                        break;
+
+                    case 'bottomRight':
+                        selectedObj.setAttribute("cx",Math.floor(coord.x));
+                        selectedObj.setAttribute("cy",Math.floor(coord.y));
+
+                        lineObj[3].setAttribute("x2", Math.floor(coord.x));
+                        lineObj[3].setAttribute("y2", Math.floor(coord.y));
+                        regEx = /\b\s\d*\,\d*\s\b/i;
+                        pathDElement.setAttribute("d",pathDElement.getAttribute("d").replace(regEx,` ${coord.x},${coord.y} `));
+                        break;
+                }
+            }
+            else {
+                let regEx, coord = getMousePosition(event);
+                let pathDElement = document.querySelector(`.primary_object${objNo}`);
+                const circlePos = selectedObj.getAttribute("circlePos");
+                const lineObj = document.querySelectorAll(`.secondary_object${objNo}`);
+                switch(circlePos) {
+                    case 'topLeft':
+                        selectedObj.setAttribute("cx",Math.floor(coord.x));
+                        selectedObj.setAttribute("cy",Math.floor(coord.y));
+
+                        lineObj[0].setAttribute("x1", Math.floor(coord.x));
+                        lineObj[0].setAttribute("y1", Math.floor(coord.y));
+                        regEx = /m\d*\,\d*/i;;
+                        pathDElement.setAttribute("d",pathDElement.getAttribute("d").replace(regEx,`M${coord.x},${coord.y}`));
+                        break;
+
+                    case 'topRight':
+                        selectedObj.setAttribute("cx",Math.floor(coord.x));
+                        selectedObj.setAttribute("cy",Math.floor(coord.y));
+
+                        lineObj[0].setAttribute("x2", Math.floor(coord.x));
+                        lineObj[0].setAttribute("y2", Math.floor(coord.y));
+                        lineObj[1].setAttribute("x1", Math.floor(coord.x));
+                        lineObj[1].setAttribute("y1", Math.floor(coord.y));
+                        regEx = /q\s*\d*\,\d*/i;
+                        pathDElement.setAttribute("d",pathDElement.getAttribute("d").replace(regEx,`Q${coord.x},${coord.y} `));
+                        break;
+
+                    case 'bottomRight':
+                        selectedObj.setAttribute("cx",Math.floor(coord.x));
+                        selectedObj.setAttribute("cy",Math.floor(coord.y));
+
+                        lineObj[1].setAttribute("x2", Math.floor(coord.x));
+                        lineObj[1].setAttribute("y2", Math.floor(coord.y));
+                        regEx = /(\s\d*\,\d*)$/i;;
+                        pathDElement.setAttribute("d",pathDElement.getAttribute("d").replace(regEx,` ${coord.x},${coord.y}`));
+                        break;
                 }
             }
             
@@ -297,7 +363,22 @@ svgContainer.onload = (event)=> {
     }
 
     function endDrag(event) {
-       selectedObj = null
+        lastSelectedObj = selectedObj;
+        selectedObj = null;
+        console.log(lastSelectedObj);
+    }
+
+    function keyFun(event) {
+        if(event.key == 'Delete')
+        {
+            console.log(event.key);
+            let svgContainer = document.querySelector("#svgMain");
+            const objNum = lastSelectedObj.getAttribute("objectNumber");
+            svgContainer.removeChild(document.querySelector(`.primary_object${objNum}`));
+            // let secEle = document.querySelectorAll(`.secondary_object${objNo}`);
+            // secEle.forEach((element) => svgContainer.removeChild(element));
+            document.querySelectorAll(`.secondary_object${objNum}`).forEach((element) => svgContainer.removeChild(element));
+        }
     }
 
     function showSecondaryObjects(obj){
@@ -313,8 +394,8 @@ svgContainer.onload = (event)=> {
     function getMousePosition(evt) {
         var CTM = svg.getScreenCTM();
         return {
-          x: (evt.clientX - CTM.e) / CTM.a,
-          y: (evt.clientY - CTM.f) / CTM.d
+          x: Math.floor((evt.clientX - CTM.e) / CTM.a),
+          y: Math.floor((evt.clientY - CTM.f) / CTM.d)
         };
     }
 }
